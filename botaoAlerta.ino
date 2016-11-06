@@ -7,7 +7,7 @@
 
                               //Entradas
 //int const sLuz = 0;         //sensor de luminosidade(pino analogico)
-int const botao = 0;          //botao de "panico"
+int const botaoP = 0;          //botao de "panico"
 
                               //Saidas
 //int const frente = 2;       //pino para andar para frente
@@ -20,16 +20,17 @@ int const botao = 0;          //botao de "panico"
 //int const dirt = 10;        //pino para virar a direita
 int const alarme = 2;         //pino para acionamento de alarme (led, buzzers ...)
 
-int const atraso = 100;       //tempo definido para delay
+int const atraso = 3000;       //tempo mínimo de botão acionado para disparar alarme(3 segs)
                               
-Servo s;                      //Variavel p/ servo motor
+//Servo s;                      //Variavel p/ servo motor
 
-int pos=90;                     //Posicao do servo motor (pos = posicao)
-int pwm = 0;                    //variavel para realizar pwm (acelerar ou diminuir velocidade do motor)
+//int pos=90;                     //Posicao do servo motor (pos = posicao)
+//int pwm = 0;                    //variavel para realizar pwm (acelerar ou diminuir velocidade do motor)
 //SoftwareSerial mBT (0,1);     //Inicializa a serial do mod Bluetooh nas portas 0 e 1 (RX, TX)
 
-char op;                        //Armazena a operaÃ§es (EX: ir p/ frente)
+//char op;                        //Armazena a operaÃ§es (EX: ir p/ frente)
 
+/*
 //tema do MARIO - cada valor representa uma frequencia que corresponde a uma determinada nota musical
 int musica[] = {660,660,660,510,660,770,380,510,380,320,440,480,450,430,380,
                 660,760,860,700,760,660,520,580,480,510,380,320,440,480,450,
@@ -54,24 +55,37 @@ int dNotas[] = {100,100,100,100,100,100,100,100,100,100,100,80,100,100,100,80,
                 100,100,100,100,100,100,100,100,100,100,60,80,60,80,80,80,80,
                 80,80,60,80,60,80,80,80,80,80,60,80,60,80,80,80,80,80,80,100,
                 100,100,100,100,100,100};
+*/
 
 void setup(){
+  
+  //Declaracao dos pinos de entrada
+  pinMode(botaoP, INPUT);
 
   //Declaracao de pinos de saida
                               
-  pinMode(frente, OUTPUT);
-  pinMode(re, OUTPUT);
-  pinMode(luzes, OUTPUT);
-  pinMode(lRe,OUTPUT);
-  pinMode(esq,OUTPUT);
-  pinMode(dirt,OUTPUT);
-  s.attach(servo);                       //Declaracao de var p/ servo motor
+  //pinMode(frente, OUTPUT);
+  //pinMode(re, OUTPUT);
+  //pinMode(luzes, OUTPUT);
+  //pinMode(lRe,OUTPUT);
+  //pinMode(esq,OUTPUT);
+  //pinMode(dirt,OUTPUT);
+  //s.attach(servo);                       //Declaracao de var p/ servo motor
+  pinMode(alarme, OUTPUT);
   
-  s.write(90);                           //Definindo servo na posiÃ§ao 0
+  //s.write(90);                           //Definindo servo na posiÃ§ao 0
 
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
+void alerta(char panico){
+  while(digitalRead(panico) == HIGH){
+    digitalWrite(alarme, HIGH);
+  }
+  sleep(atraso);
+}
+
+/*
 void andar(char run){                    // funcao p/ andar p/ frente ou p/ re
   if(run == 'f'){
     pwm += 5;
@@ -94,7 +108,8 @@ void andar(char run){                    // funcao p/ andar p/ frente ou p/ re
   if(pwm == 255)
     pwm = 255;
 }
-
+*/
+/*
 void virar(char lado){                      // funcao p/ direçao (virar a esquerda ou direita) - dir = direcao
   //COD P/ MOTOR CC
   
@@ -118,7 +133,7 @@ void virar(char lado){                      // funcao p/ direçao (virar a esque
   }
   */
   
-
+/*
   //COD P/ SERVO MOTOR
   if(lado == 'e'){
     pos -= 5;
@@ -192,6 +207,7 @@ void buzina(){
 }
 
 //String str;
+*/
 
 void loop(){
   
