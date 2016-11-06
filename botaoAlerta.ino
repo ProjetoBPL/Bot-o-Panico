@@ -11,7 +11,7 @@ int const alarme = 3;         //pino para acionamento de alarme (led, buzzers ..
 
 unsigned long const atraso = 3000;             //tempo mínimo que o botão deve ficar pressionado para disparar o alarme (3 segs)
 unsigned long const tempóAcionado = 6000;      //tempo que o alarme se mantera acionado (6 segs)
-//unsigned long tempoAtual = 0;                  //tempo atual que sera capturado pela funcao millis()
+//unsigned long tempoAtual = 0;                //tempo atual que sera capturado pela funcao millis()
 unsigned long tempoDecorrido = 0;              //tempo decorrido que sera capturado pela funcao millis()
                               
 
@@ -30,7 +30,7 @@ void setup(){
 void alerta(){
   if(temporizador()){
     digitalWrite(alarme, HIGH);            //Aciona o alarme
-    sleep(atraso);                         //Tempo que o alarme se mantera acionado
+    sleep(tempoAcionado);                  //Tempo que o alarme se mantera acionado
     digitalWrite(alarme, LOW);             //Desaciona alarme
   }
   else
@@ -51,7 +51,7 @@ int temporizador(){                                      //Funcao que mede tempo
 
 
 void loop(){
-  if(digitalRead(botaoP) == HIGH)                        ////Chama a funcao alerta se botao de panico for acionado
+  if(digitalRead(botaoP) == HIGH)                        //Chama a funcao alerta se botao de panico for acionado
   alerta();
 }
 
