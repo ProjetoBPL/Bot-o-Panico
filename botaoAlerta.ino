@@ -36,7 +36,6 @@ void alerta(){
   else
     digitalWrite(alarme, LOW);
   
-  tempoDecorrido = millis();
 }
 
 int temporizador(){                                      //Funcao que mede tempo decorrido entre acionamentos
@@ -53,6 +52,7 @@ int temporizador(){                                      //Funcao que mede tempo
 void loop(){
   if(digitalRead(botaoP) == HIGH)                        //Chama a funcao alerta se botao de panico for acionado
   alerta();
+  tempoDecorrido = millis();                             //Salva o tempo decorrido fim de execucao do codigo
 }
 
 
