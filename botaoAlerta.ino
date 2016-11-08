@@ -1,5 +1,5 @@
 //ALEX VIADAUM
-//VERSAO BETA
+//VERSAO TETA
 #include <SoftwareSerial.h>
 
 
@@ -10,7 +10,7 @@ int const botaoP = 2;         //pino para botao de "panico"
 int const alarme = 3;         //pino para acionamento de alarme (led, buzzers ...)
 
 unsigned long const atraso = 3000;             //tempo mínimo que o botão deve ficar pressionado para disparar o alarme (3 segs)
-unsigned long const tempóAcionado = 6000;      //tempo que o alarme se mantera acionado (6 segs)
+unsigned long const tempoAcionado = 10000;      //tempo que o alarme se mantera acionado (10 segs) - Verificar tempo. 
 //unsigned long tempoAtual = 0;                //tempo atual que sera capturado pela funcao millis()
 unsigned long tempoDecorrido = 0;              //tempo decorrido que sera capturado pela funcao millis()
                               
@@ -25,6 +25,12 @@ void setup(){
   pinMode(alarme, OUTPUT);
  
   Serial.begin(9600);
+}
+
+void loop(){
+  if(digitalRead(botaoP) == HIGH)                        //Chama a funcao alerta se botao de panico for acionado
+  alerta();
+  tempoDecorrido = millis();                             //Salva o tempo decorrido fim de execucao do codigo
 }
 
 void alerta(){
@@ -47,15 +53,6 @@ int temporizador(){                                      //Funcao que mede tempo
   else
     return (0);                                          //Caso contrario retorna (0 = falso)
 }
-
-
-void loop(){
-  if(digitalRead(botaoP) == HIGH)                        //Chama a funcao alerta se botao de panico for acionado
-  alerta();
-  tempoDecorrido = millis();                             //Salva o tempo decorrido fim de execucao do codigo
-}
-
-
 //Funcao millis() -> https://www.arduino.cc/en/Reference/Millis
 
 
