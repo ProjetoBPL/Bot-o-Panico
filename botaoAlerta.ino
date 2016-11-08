@@ -13,8 +13,10 @@ unsigned long const atraso = 3000;             //tempo mínimo que o botão deve
 unsigned long const tempoAcionado = 10000;      //tempo que o alarme se mantera acionado (10 segs) - Verificar tempo. 
 //unsigned long tempoAtual = 0;                //tempo atual que sera capturado pela funcao millis()
 unsigned long tempoDecorrido = 0;              //tempo decorrido que sera capturado pela funcao millis()
-                              
 
+void alerta();
+
+int temporizador();
 
 void setup(){
   
@@ -36,7 +38,7 @@ void loop(){
 void alerta(){
   if(temporizador()){
     digitalWrite(alarme, HIGH);            //Aciona o alarme
-    sleep(tempoAcionado);                  //Tempo que o alarme se mantera acionado
+    delay(tempoAcionado);                  //Tempo que o alarme se mantera acionado
     digitalWrite(alarme, LOW);             //Desaciona alarme
   }
   else
@@ -54,19 +56,3 @@ int temporizador(){                                      //Funcao que mede tempo
     return (0);                                          //Caso contrario retorna (0 = falso)
 }
 //Funcao millis() -> https://www.arduino.cc/en/Reference/Millis
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
